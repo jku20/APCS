@@ -11,17 +11,15 @@ class CmdLnCommand {
         String command = this.sc.nextLine();
         switch(command) {
             case "help":
-                System.out.println(
-                        "help" + "\n" + 
-                        "tasks" + "\n" +
-                        "quit" + "\n"
-                        );
+                Command help = new CmdHelp(new String[] {"tasks", "help", "quit"});
+                help.run();
                 break;
             case "tasks":
                 System.out.println("implement tasks function");
                 break;
             case "quit":
-                System.exit(0);
+                Command quit = new CmdQuit();
+                quit.run();
                 break;
             case "save":
                 System.out.println("implement save function in CSV writer class thing");

@@ -5,10 +5,9 @@ class CmdHelp implements Command {
     }
     public void info() {
         System.out.println(
-                "
-                ----help----
-                help prints out all current commands
-                ");
+                "----help----" +
+                "help prints out all current commands"
+                );
     }
     public void run(){
         for(String cmd : cmdList)
