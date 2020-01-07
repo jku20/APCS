@@ -1,0 +1,7 @@
+To implement commands it would be a good idea to do it through making
+a command interface and then just making differnt classes for every command
+which just has the needed methods of
+-description
+-run
+-maybe some other stuff
+
