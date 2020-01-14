@@ -5,7 +5,7 @@ class CmdHelp implements Command {
     }
     public void info() {
         System.out.println(
-                "----help----" +
+                "----help----\n" +
                 "help prints out all current commands"
                 );
     }

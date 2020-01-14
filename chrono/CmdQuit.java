@@ -3,7 +3,7 @@ class CmdQuit implements Command {
     }
     public void info() {
         System.out.println(
-                "----quit----" +
+                "----quit----\n" +
                 "quits the current session"
                 );
     }

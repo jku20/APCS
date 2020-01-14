@@ -3,8 +3,10 @@ class CmdLnCommand {
    //bassically serves as a hub, all other functions will be called from here.
    //this just bassically takes the commands
     private Scanner sc;
-    public CmdLnCommand() {
+    private String[] commands;
+    public CmdLnCommand(String[] commands) {
         this.sc = new Scanner(System.in);
+        this.commands = commands;
     }
     //this returns the code which the command will be. It is just and integer which will count up for more command names as needed.
     public void nextCommand() {
@@ -14,7 +16,7 @@ class CmdLnCommand {
         if(!command.split(" ")[0].equals("help") || command.split(" ").length == 1) {
             switch(command) {
                 case "help":
-                    Command help = new CmdHelp(new String[] {"tasks", "help", "quit"});
+                    Command help = new CmdHelp(commands);
                     help.run();
                     break;
                 case "tasks":
@@ -31,7 +33,7 @@ class CmdLnCommand {
         } else {
             switch(command.split(" ")[1]) {
                 case "help":
-                    Command help = new CmdHelp(new String[] {"tasks", "help", "quit"});
+                    Command help = new CmdHelp(commands);
                     help.info();
                     break;
                 case "tasks":

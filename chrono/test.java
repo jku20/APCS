@@ -7,7 +7,7 @@ class Test {
         //ls.select(sc.nextInt());
         //ls.printSelection();
         System.out.println("command help lists commands");
-        CmdLnCommand cmd = new CmdLnCommand();
+        CmdLnCommand cmd = new CmdLnCommand(new String[] {"help", "tasks", "quit", "save"});
         while(true) {
             cmd.nextCommand();
         }

@@ -1,3 +1,4 @@
+//This may be deleted, or more likely massively reworked
 import java.io.*;
 class CsvWriter {
     private String[] columns;
@@ -12,29 +13,6 @@ class CsvWriter {
     }
     public void write() throws FileNotFoundException { 
         PrintWriter pw = new PrintWriter(this.name);
-    }
-    private static String setLength(String str, int len) {
-        String out = "";
-        if(str.length() < len) {
-            out = str;
-            for(int j = 0; j < len; j++) {
-                out = out + " ";
-            }
-        } else
-            out = str.substring(0,len);
-        return out;
-    }
-
-    public void printTable() {
-        for(int i = 0; i < columns.length; i++)
-            System.out.print(setLength(columns[i], 8));
-        System.out.println();
-        for(int i = 0; i < rows.length; i++) {
-            System.out.print(setLength(rows[i], 8));
-            for(int j = 0; j < data[i].length; j++)
-                System.out.print(setLength(data[i][j], 8));
-            System.out.println();
-        }
     }
     public static void main(String[] args) {
 
