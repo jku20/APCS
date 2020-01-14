@@ -1,3 +1,8 @@
+//import java.io.PrintWriter;
+//import java.io.BufferedReader;
+//import java.io.FileReader;
+//import java.io.File;
+import java.io.*;
 class Table {
     private String[] columns; //column names
     private String[] rows; //row names
@@ -44,6 +49,33 @@ class Table {
         }
         return out;
     }
+    public static Table readCsv(String fileIn) throws FileNotFoundException, IOException { //note requires the amount of rows as first line in file
+        BufferedReader br = new BufferedReader(new FileReader(fileIn));
+        int numRows = Integer.parseInt(br.readLine());
+        String[] columns = br.readLine().split(",");
+        String[] rows = new String[numRows];
+        String[][] data = new String[columns.length][numRows];
+        for(int i = 0; i < numRows; i++) {
+            String[] tmp = br.readLine().split(",");
+            rows[i] = tmp[0];
+            for(int j = 1; j < tmp.length; j++)
+                data[i][j - 1] = tmp[j];
+        }
+        br.close();
+        return new Table(columns, rows, data);
+    }
+    public void writeCSVFile(String fileName) throws FileNotFoundException {
+        File outFile = new File(fileName);
+        PrintWriter pw = new PrintWriter(fileName);
+        pw.println(rows.length);
+        String[][] out = this.csvRepresentation();
+        for(String[] i : out) {
+            for(String j : i)
+                pw.print("j" + ",");
+            pw.println();
+        }
+        pw.close();
+    }
     public static void main(String[] args) {
         Table t = new Table(
                 new String[] {"num 1", "num 2", "nums 3"},
@@ -64,6 +96,3 @@ class Table {
     }
     
 }
-
-
-
