@@ -29,6 +29,13 @@ class CmdLnCommand {
                 case "save":
                     System.out.println("implement save function CSV writer class thing");
                     break;
+                case "clear":
+                    Command clear = new CmdClear();
+                    clear.run();
+                    break;
+                default:
+                    System.out.println("----not a valid command---");
+                    break;
             }
         } else {
             switch(command.split(" ")[1]) {
@@ -45,6 +52,13 @@ class CmdLnCommand {
                     break;
                 case "save":
                     System.out.println("implement save fuction CSV writer class thing");
+                    break;
+                case "clear":
+                    Command clear = new CmdClear();
+                    clear.info();
+                    break;
+                default:
+                    System.out.println("----not a valid command----");
                     break;
             }
         }
