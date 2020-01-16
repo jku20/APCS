@@ -71,12 +71,12 @@ class Table {
         String[][] out = this.csvRepresentation();
         for(String[] i : out) {
             for(String j : i)
-                pw.print("j" + ",");
+                pw.print(j + ",");
             pw.println();
         }
         pw.close();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Table t = new Table(
                 new String[] {"num 1", "num 2", "nums 3"},
                 new String[] {"a", "b", "c", "d"},
@@ -93,6 +93,6 @@ class Table {
                 System.out.print(j + " ");
             System.out.println();
         }
+        t.writeCSVFile("toTwelve.csv");
     }
-    
 }
