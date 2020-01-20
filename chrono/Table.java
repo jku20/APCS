@@ -54,16 +54,12 @@ class Table {
         BufferedReader br = new BufferedReader(new FileReader(fileIn));
         int numRows = Integer.parseInt(br.readLine());
         String[] columns = br.readLine().split(",");
-
-        System.out.println(Arrays.toString(columns));
-
         String[] rows = new String[numRows];
         String[][] data = new String[numRows][columns.length];
         for(int i = 0; i < numRows; i++) {
             String[] tmp = br.readLine().split(",");
             rows[i] = tmp[0];
             for(int j = 1; j < tmp.length; j++) {
-                System.out.println("j:" + j + "i:" + i);
                 data[i][j - 1] = tmp[j];
             }
         }
