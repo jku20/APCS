@@ -68,11 +68,11 @@ class Table {
     public static Table readCSV(String fileIn) throws FileNotFoundException, IOException { //note requires the amount of rows as first line in file
         BufferedReader br = new BufferedReader(new FileReader(fileIn));
         int numRows = Integer.parseInt(br.readLine());
-        String[] columns = br.readLine().split(",");
+        String[] columns = br.readLine().split("??,??");
         String[] rows = new String[numRows];
         String[][] data = new String[numRows][columns.length];
         for(int i = 0; i < numRows; i++) {
-            String[] tmp = br.readLine().split(",");
+            String[] tmp = br.readLine().split("??,??");
             rows[i] = tmp[0];
             for(int j = 1; j < tmp.length; j++) {
                 data[i][j - 1] = tmp[j];
@@ -88,7 +88,7 @@ class Table {
         String[][] out = this.csvRepresentation();
         for(String[] i : out) {
             for(String j : i)
-                pw.print(j + ",");
+                pw.print(j + "??,??");
             pw.println();
         }
         pw.close();

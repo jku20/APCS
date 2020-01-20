@@ -1,8 +1,9 @@
 interface Group {
-    public void startTimer(); //starts timer for itself and children
-    public void stopTimer(); //stops timer for itself and children
-    public int getDuration(); //returns the current sum of durations
-    public String getName();
+    void startTimer(); //starts timer for itself and children
+    void stopTimer(); //stops timer for itself and children
+    int getDuration(); //returns the current sum of durations
+    String getName();
+    String getStringRep();
     //maybe a way to compare whether groups are equal with and equals method
     //but I think that may be unnessesary
 }

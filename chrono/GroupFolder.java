@@ -10,6 +10,9 @@ class GroupFolder implements Group {
     public GroupFolder(String name, Group[] children) {
         this(name, "Undescribable", children);
     }
+    public GroupFolder(String name, String desc) {
+        this(name, desc, new Group[] {});
+    }
     public GroupFolder(Group[] children) {
         this("Unnameable", "Undescribable", children);
     }
@@ -44,5 +47,12 @@ class GroupFolder implements Group {
     public void stopTimer() {
         for(Group task : children)
             task.stopTimer();
+    }
+    public String getStringRep() { //should not need to keep track of children here that should be done by a table
+        return name + "&&,&&" + desc;
+    }
+    public static GroupFolder fromStringRep(String str) {
+        String[] rep = str.split("&&,&&");
+        return new GroupFolder(rep[0], rep[1]);
     }
 }

@@ -40,11 +40,11 @@ class Task implements Group{
         this.end = time;
     }
     public String getStringRep() {
-        return start + "_" + end + "_" + desc;
+        return start + "__,__" + end + "__,__" + name + "__,__" + desc;
     }
     public static Task fromStringRep(String str) {
-        String[] rep = str.split("_");
-        Task out = new Task(rep[2]);
+        String[] rep = str.split("__,__");
+        Task out = new Task(rep[2], rep[3]);
         out.setStart(Integer.parseInt(rep[0]));
         out.setEnd(Integer.parseInt(rep[1]));
         return out;
