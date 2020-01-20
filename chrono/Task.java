@@ -1,15 +1,22 @@
-import java.util.ArrayList;
 class Task implements Group{
     private int start;
     private int end;
     private String desc;
-    public Task(String desc) { //note the "_" character is not alloud in descriptions
+    private String name;
+    public Task(String name, String desc) { //note the "_" character is not alloud in descriptions
         this.desc = desc;
+        this.name = name;
         start = 0;
         end = 0;
     }
+    public String getName() {
+        return name;
+    }
     public Task() {
-        this("Undescribable");
+        this("Unameable", "Undescribable");
+    }
+    public Task(String name) {
+        this(name, "Undescribable");
     }
     public void startTimer() {
         start = (int) (System.currentTimeMillis() / 1000L);
@@ -24,7 +31,7 @@ class Task implements Group{
         return end;
     }
     public int getDuration() {
-        return getEnd() - getStart();
+        return getEnd() - getStart() > 0 ? getEnd() - getStart() : 0;
     }
     public void setStart(int time) {
         this.start = time;

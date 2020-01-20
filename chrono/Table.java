@@ -37,7 +37,7 @@ class Table {
     public String[] getColumn(int column) {
         String[] out = new String[rows.length + 1];
         columns[column] = out[0];
-        for(int i = 0; i < data.length)
+        for(int i = 0; i < data.length; i++)
             out[i + 1] = data[i][column];
         return out;
     }
