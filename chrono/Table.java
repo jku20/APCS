@@ -3,6 +3,7 @@
 //import java.io.FileReader;
 //import java.io.File;
 import java.io.*;
+import java.util.Arrays;
 class Table {
     private String[] columns; //column names
     private String[] rows; //row names
@@ -49,17 +50,22 @@ class Table {
         }
         return out;
     }
-    public static Table readCsv(String fileIn) throws FileNotFoundException, IOException { //note requires the amount of rows as first line in file
+    public static Table readCSV(String fileIn) throws FileNotFoundException, IOException { //note requires the amount of rows as first line in file
         BufferedReader br = new BufferedReader(new FileReader(fileIn));
         int numRows = Integer.parseInt(br.readLine());
         String[] columns = br.readLine().split(",");
+
+        System.out.println(Arrays.toString(columns));
+
         String[] rows = new String[numRows];
-        String[][] data = new String[columns.length][numRows];
+        String[][] data = new String[numRows][columns.length];
         for(int i = 0; i < numRows; i++) {
             String[] tmp = br.readLine().split(",");
             rows[i] = tmp[0];
-            for(int j = 1; j < tmp.length; j++)
+            for(int j = 1; j < tmp.length; j++) {
+                System.out.println("j:" + j + "i:" + i);
                 data[i][j - 1] = tmp[j];
+            }
         }
         br.close();
         return new Table(columns, rows, data);
@@ -76,7 +82,7 @@ class Table {
         }
         pw.close();
     }
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException{
         Table t = new Table(
                 new String[] {"num 1", "num 2", "nums 3"},
                 new String[] {"a", "b", "c", "d"},
@@ -94,5 +100,7 @@ class Table {
             System.out.println();
         }
         t.writeCSVFile("toTwelve.csv");
+        Table f = readCSV("toTwelve.csv");
+        f.printTable(6);
     }
 }
