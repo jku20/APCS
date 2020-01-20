@@ -25,7 +25,22 @@ class Table {
             out = str.substring(0,len);
         return out;
     }
-
+    public String[] getColumns() {
+        return columns;
+    }
+    public String[] getRows() {
+        return rows;
+    }
+    public String[][] getData() {
+        return data;
+    }
+    public String[] getColumn(int column) {
+        String[] out = new String[rows.length + 1];
+        columns[column] = out[0];
+        for(int i = 0; i < data.length)
+            out[i + 1] = data[i][column];
+        return out;
+    }
     public void printTable(int size) { //prints table to console
         for(int i = 0; i < size; i++) 
             System.out.print(" ");
