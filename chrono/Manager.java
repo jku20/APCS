@@ -1,17 +1,17 @@
 class Manager {
-    private Group[] tracks;
+    private GroupFolder[] tracks;
     public Manager() {
-        this.tracks = new Group[] {};
+        this.tracks = new GroupFolder[] {};
     }
-    public void addGroup(Group grp) {
-        Group[] out = new Group[tracks.length + 1];
+    public void addGroup(GroupFolder grp) {
+        GroupFolder[] out = new GroupFolder[tracks.length + 1];
         for(int i = 0; i < tracks.length; i++)
             out[i] = tracks[i];
         out[out.length - 1] = grp;
         tracks = out;
     }
     public void removeGroup(String name) {
-        Group[] out = new Group[tracks.length - 1];
+        GroupFolder[] out = new GroupFolder[tracks.length - 1];
         int count = 0;
         for(int i = 0; i < out.length; i++)
             if(!tracks[i].getName().equals(name))
@@ -19,17 +19,21 @@ class Manager {
         tracks = out;
     }
     public void printGroups() {
-        for(Group i : tracks)
+        for(GroupFolder i : tracks)
             System.out.println(i.getName() + "\n" + "---" + i.getDesc());
     }
-    public Group[] getTracks() {
+    public GroupFolder[] getTracks() {
         return tracks;
     }
-    public Group getGroup(int index) {
-        return tracks[index];
+    public GroupFolder getGroup(String name) {
+        GroupFolder out = null;
+        for(GroupFolder i : tracks)
+            if(i.getName().equals(name))
+                out = i;
+        return out;
     }
     public void printTasks() {
-        for(Group i : tracks)
+        for(GroupFolder i : tracks)
             i.printRep();
     }
 }

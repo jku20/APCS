@@ -4,6 +4,9 @@ class Timer extends GroupFolder {
     public Timer(String name, String desc) {
         super(name, desc);
     }
+    public Timer(String name) {
+        this(name, "Undescribable");
+    }
     public void startTimer(String desc) {
         this.addChild(new Task(Integer.toString(count++), desc));
         this.startTimer();
@@ -11,7 +14,7 @@ class Timer extends GroupFolder {
     }
     public void startTimer() {
         this.addChild(new Task(Integer.toString(count++), ""));
-        this.startTimer();
+        super.startTimer();
         started = true;
     }
     public void StopTimer() {

@@ -11,6 +11,13 @@ class CmdLnCommand {
         this.man = new Manager();
     }
     //this returns the code which the command will be. It is just and integer which will count up for more command names as needed.
+    private boolean isLength(int l, int f) {
+        if(l < f) {
+            System.out.println("missing argument(s)");
+            return false;
+        } else
+            return true;
+    }
     public void nextCommand() {
         String command = this.sc.nextLine();
         String[] com = command.split(" ");
@@ -19,7 +26,36 @@ class CmdLnCommand {
         if(!command.split(" ")[0].equals("help") || command.split(" ").length == 1) {
             switch(com[0]) {
                 case "gadd":
-                    man.addGroup(new GroupFolder(com[1]));
+                    if(com.length > 1)
+                        man.addGroup(new GroupFolder(com[1]));
+                    else
+                        System.out.println("missing argmument");
+                    break;
+                case "add":
+                    if(com.length > 1) {
+                        if(man.getGroup(com[1]) != null)
+                            man.getGroup(com[1]).addChild(new Timer(com[2]));
+                        else
+                            System.out.println("Group does not exist");
+                    } else
+                        System.out.println("missing argmument");
+                    break;
+                case "start": 
+                    if(com.length > 2)
+                        if(man.getGroup(com[1]) != null)
+                            man.getGroup(com[1]).startTimer(com[2]);
+                        else
+                            System.out.println("Group does not exist");
+                    else
+                        System.out.println("missing argument(s)");
+                    break;
+                case "stop":
+                    if(isLength(com.length, 1)) {
+                        if(com.length == 2)
+                            man.getGroup(com[1]).stopTimer();
+                        else
+                            man.getGroup(com[1]).stopTimer(com[2]);
+                    }
                     break;
                 case "help":
                     Command help = new CmdHelp(commands);
@@ -50,6 +86,12 @@ class CmdLnCommand {
             switch(command.split(" ")[1]) {
                 case "gadd":
                     System.out.println("takes one arguement, creates a group with that name");
+                    break;
+                case "add":
+                    System.out.println("takes one arguement, creates a timer with that name");
+                    break;
+                case "start":
+                    System.out.println("starts a timer, given arguments, the first the group the timer is in and the seccond the timer. Note the timer must exists otherwise nothing will happen.");
                     break;
                 case "help":
                     Command help = new CmdHelp(commands);
