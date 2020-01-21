@@ -26,6 +26,9 @@ class GroupFolder implements Group {
     public String getDesc() {
         return desc;
     }
+    public Group[] getChildren() {
+        return children;
+    }
     public void addChild(Group child) {
         Group[] out = new Group[children.length + 1];
         for(int i = 0; i < children.length; i++) 
@@ -67,6 +70,10 @@ class GroupFolder implements Group {
     public void stopTimer() {
         for(Group task : children)
             task.stopTimer();
+    }
+    public static GroupFolder getFromString(String rep) {
+        String[] lrep = rep.split("&&,&&");
+        return new GroupFolder(lrep[0],lrep[1]);
     }
     public String getStringRep() { //should not need to keep track of children here that should be done by a table
         return name + "&&,&&" + desc;

@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 class CmdLnCommand { 
    //bassically serves as a hub, all other functions will be called from here.
    //this just bassically takes the commands
@@ -10,6 +12,9 @@ class CmdLnCommand {
         this.commands = commands;
         this.man = new Manager();
     }
+    public void setMan(Manager man) {
+        this.man = man;
+    }
     //this returns the code which the command will be. It is just and integer which will count up for more command names as needed.
     private boolean isLength(int l, int f) {
         if(l < f) {
@@ -18,7 +23,7 @@ class CmdLnCommand {
         } else
             return true;
     }
-    public void nextCommand() {
+    public void nextCommand() throws FileNotFoundException, IOException {
         String command = this.sc.nextLine();
         String[] com = command.split(" ");
         //two cases, keyword help which gets description of command
@@ -72,7 +77,12 @@ class CmdLnCommand {
                     quit.run();
                     break;
                 case "save":
-                    System.out.println("implement save function CSV writer class thing");
+                    Table tab = man.tableRep();
+                    tab.writeCSVFile("save.file");
+                    break;
+                case "load":
+                    Table save = Table.readCSV("save.file");
+                    setMan(Manager.fromTableRep(save));
                     break;
                 case "clear":
                     Command clear = new CmdClear();
@@ -108,7 +118,10 @@ class CmdLnCommand {
                     quit.info();
                     break;
                 case "save":
-                    System.out.println("implement save fuction CSV writer class thing");
+                    System.out.println("saves to file in running directory");
+                    break;
+                case "load":
+                    System.out.println("loads saved file");
                     break;
                 case "clear":
                     Command clear = new CmdClear();
