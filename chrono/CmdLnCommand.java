@@ -66,11 +66,36 @@ class CmdLnCommand {
                     Command help = new CmdHelp(commands);
                     help.run();
                     break;
+                case "group":
+                    if(isLength(com.length, 1)) {
+                        if(man.getGroup(com[1]) != null)
+                            man.getGroup(com[1]).printRep();
+                        else 
+                            System.out.println("Group does not exist");
+                    }
+                    break;
                 case "tasks":
                     man.printTasks();
                     break;
                 case "groups":
                     man.printGroups();
+                    break;
+                case "rmGroup":
+                    if(isLength(com.length,1))
+                        man.removeGroup(com[1]);
+                    break;
+                case "rmTask":
+                    if(isLength(com.length, 2))
+                        man.getGroup(com[1]).removeChild(com[2]);
+                    break;
+                case "mvTask":
+                    if(isLength(com.length, 3)) {
+                        System.out.println(man.getGroup(com[1]).getChild(com[2]) == null);
+                        if(man.getGroup(com[1]).getChild(com[2]) != null && man.getGroup(com[3]) != null) {
+                            man.getGroup(com[3]).addChild(man.getGroup(com[1]).getChild(com[2]));
+                            man.getGroup(com[1]).removeChild(com[2]);
+                        }
+                    }
                     break;
                 case "quit":
                     Command quit = new CmdQuit();
@@ -107,11 +132,23 @@ class CmdLnCommand {
                     Command help = new CmdHelp(commands);
                     help.info();
                     break;
+                case "group":
+                    System.out.println("given argument for the group, it prints out all tasks of that group");
+                    break;
                 case "groups":
                     System.out.println("Print all current groups");
                     break;
+                case "mvTask":
+                    System.out.println("given two arguments which refer to the group of the task and the task, and a third which refers to the wanted new group will move the task into the new group");
+                    break;
                 case "tasks":
                     System.out.println("Print all current tasks");
+                    break;
+                case "rmGroup":
+                    System.out.println("removes the group specified in the argument");
+                    break;
+                case "rmTask":
+                    System.out.println("removes task in group specified by first argument and with name specified by the second one");
                     break;
                 case "quit":
                     Command quit = new CmdQuit();

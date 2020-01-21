@@ -67,6 +67,13 @@ class GroupFolder implements Group {
             if(task.getName().equals(name))
                 task.stopTimer();
     }
+    public Group getChild(String name) {
+        Group out = null;
+        for(Group i : children)
+            if(i.getName().equals(name))
+                out = i;
+        return out;
+    }
     public void stopTimer() {
         for(Group task : children)
             task.stopTimer();
