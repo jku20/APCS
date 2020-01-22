@@ -16,7 +16,7 @@ class CmdLnCommand {
         this.man = man;
     }
     //this returns the code which the command will be. It is just and integer which will count up for more command names as needed.
-    private boolean isLength(int l, int f) {
+    private static boolean isLength(int l, int f) {
         if(l < f) {
             System.out.println("missing argument(s)");
             return false;
@@ -80,6 +80,26 @@ class CmdLnCommand {
                 case "groups":
                     man.printGroups();
                     break;
+                case "setDesc":
+                    if(isLength(com.length, 3)) {
+                        if(!com[1].equals("g")) {
+                            String desc = "";
+                            for(int i = 3; i < com.length; i++)
+                                desc = desc + " " + com[i];
+                            if(man.getGroup(com[1]) != null && man.getGroup(com[1]).getChild(com[2]) != null) {
+                                man.getGroup(com[1]).getChild(com[2]).setDesc(desc);
+                            }
+                        } else {
+                            if(isLength(com.length, 3)) {
+                                String desc = "";
+                                for(int i = 3; i < com.length; i++)
+                                    desc = desc + " " + com[i];
+                                if(man.getGroup(com[2]) != null)
+                                    man.getGroup(com[2]).setDesc(desc);
+                            }
+                        }
+                    }
+                    break;
                 case "rmGroup":
                     if(isLength(com.length,1))
                         man.removeGroup(com[1]);
@@ -131,6 +151,9 @@ class CmdLnCommand {
                 case "help":
                     Command help = new CmdHelp(commands);
                     help.info();
+                    break;
+                case "setDesc":
+                    System.out.println("If you want to describe a groups add the argument g as the first argument and the group name after. Else give the group and then name of the timer. Description should just be placed after those");
                     break;
                 case "group":
                     System.out.println("given argument for the group, it prints out all tasks of that group");

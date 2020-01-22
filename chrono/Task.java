@@ -12,6 +12,9 @@ class Task implements Group{
         start = 0;
         end = 0;
     }
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
     public String getName() {
         return name;
     }

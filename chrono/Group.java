@@ -6,6 +6,7 @@ interface Group {
     String getName();
     String getStringRep();
     String getDesc();
+    void setDesc(String desc);
     //maybe a way to compare whether groups are equal with and equals method
     //but I think that may be unnessesary
 }

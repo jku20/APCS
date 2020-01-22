@@ -19,6 +19,9 @@ class GroupFolder implements Group {
     public GroupFolder(Group[] children) {
         this("Unnameable", "Undescribable", children);
     }
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
     public void printRep() {
         for(Group i : children)
             i.printRep();
